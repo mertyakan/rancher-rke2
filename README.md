@@ -153,7 +153,7 @@ deployment "rancher" successfully rolled out
 
 > get https://rke2.rancher.local
 
-
+![This is an image](http://mertyakan.com/wp-content/uploads/2021/09/Screenshot-from-2021-09-15-20-43-23.png)
 
 
 
