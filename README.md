@@ -97,7 +97,7 @@ helm install rancher rancher-latest/rancher \
   --set hostname=rancher.my.org \
   --set bootstrapPassword=admin
 ```
-Wait for Rancher to be rolled out:
+> Wait for Rancher to be rolled out:
 ```
 kubectl -n cattle-system rollout status deploy/rancher
 Waiting for deployment "rancher" rollout to finish: 0 of 3 updated replicas are available...
@@ -108,11 +108,13 @@ deployment "rancher" successfully rolled out
 
 
 # output
-
+```
 [root@rancher ~]# helm install rancher rancher-latest/rancher \
->   --namespace cattle-system \
->   --set hostname=rke2.rancher.local \
->   --set bootstrapPassword=admin
+--namespace cattle-system \
+--set hostname=rke2.rancher.local \
+--set bootstrapPassword=admin
+```
+```
 W0915 20:10:18.101826   26224 warnings.go:70] cert-manager.io/v1beta1 Issuer is deprecated in v1.4+, unavailable in v1.6+; use cert-manager.io/v1 Issuer
 NAME: rancher
 LAST DEPLOYED: Wed Sep 15 20:10:17 2021
@@ -142,16 +144,22 @@ kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{
 ```
 
 Happy Containering!
+```
+```
 [root@rancher ~]# echo https://rke2.rancher.local/dashboard/?setup=$(kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}')
+```
 https://rke2.rancher.local/dashboard/?setup=admin
+```
 [root@rancher ~]# kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}{{ "\n" }}'
 admin
-
+```
+```
 [root@rancher ~]# kubectl -n cattle-system rollout status deploy/rancher
 deployment "rancher" successfully rolled out
 [root@rancher ~]# 
 
 > get https://rke2.rancher.local
+```
 
 ![This is an image](http://mertyakan.com/wp-content/uploads/2021/09/Screenshot-from-2021-09-15-20-43-23.png)
 
