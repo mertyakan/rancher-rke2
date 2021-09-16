@@ -1,4 +1,4 @@
-# rancher-rke2 install single node cewntos7
+# rancher-rke2 install single node centos7
 
 ---
 # 1. Install Kubernetes and Set up the RKE2 Server
