@@ -1,5 +1,6 @@
 # rancher-rke2 install single node centos7
 
+NOTE: ntp, selinux, firewalld, hostname ayarları yapılmalı
 ---
 # 1. Install Kubernetes and Set up the RKE2 Server
 
