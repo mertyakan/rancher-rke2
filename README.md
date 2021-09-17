@@ -43,9 +43,11 @@ curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scr
 chmod 700 get_helm.sh
 ./get_helm.sh
 ```
+```
 helm repo add rancher-latest https://releases.rancher.com/server-charts/latest
 kubectl create namespace cattle-system
-
+```
+https://rancher.com/docs/rancher/v2.6/en/installation/install-rancher-on-k8s/
 > get cert-manager
 The Rancher management server is designed to be secure by default and requires SSL/TLS configuration.
 
