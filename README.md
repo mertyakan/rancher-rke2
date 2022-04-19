@@ -167,6 +167,38 @@ deployment "rancher" successfully rolled out
 ![This is an image](http://mertyakan.com/wp-content/uploads/2021/09/Screenshot-from-2021-09-15-20-43-23.png)
 
 
+Edited; 19.04.2022
+
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.8.0/cert-manager.yaml
+helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=rke2.mnm.local --set bootstrapPassword=admin
+kubectl -n cattle-system rollout status deploy/rancher
+echo https://rke2.mnm.local/dashboard/?setup=$(kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}')
+
+
+Worker;
+
+#!/bin/bash
+# rke2 - (Worker) Node Installation
+
+# Variables, DO NO~T FORGET TO FILL IT
+SERVER_IP="192.168.1.60"
+TOKEN="K10a3554734febf9640170918a013fb5176c95868de741e6b37df1bf7ab5d66f6fe::server:c364def31225fd1af2331bf7a461e932"
+
+# Swap Off
+sudo swapoff -a
+sudo sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+# Run the installer
+curl -sfL https://get.rke2.io | INSTALL_RKE2_TYPE="agent" sh -
+# Enable the rke2-agent service
+systemctl enable rke2-agent.service
+# Configure the rke2-agent service¶
+mkdir -p /etc/rancher/rke2/
+echo "server: https://$SERVER_IP:9345" | sudo tee /etc/rancher/rke2/config.yaml
+echo "token: $TOKEN" \ >> /etc/rancher/rke2/config.yaml
+# Start the service
+systemctl start rke2-agent.service
+
 
 
 
